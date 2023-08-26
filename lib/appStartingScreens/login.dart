@@ -21,124 +21,121 @@ class _LoginScreenState extends State<LoginScreen> {
       home: Scaffold(
         body: Container(
           color: AppColors.theme["bg"],
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40) ,
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 300,
-                height: 500,
-
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40) ,
-                    color: AppColors.theme["logincot"],
-                  ),
-
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage("assets/images/login_phot.png"),),
-                      SizedBox(height: MediaQuery.of(context).size.height*0.02,) ,
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*0.01 ),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor:  AppColors.theme['white'],
-                            hintText: "Enter Username",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color:  AppColors.theme['white'],
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40) ,
+              ),
+              child: Center(
+                child: SizedBox(
+                  width: 300,
+                  height: 500,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 80,
+                          backgroundImage: AssetImage("assets/images/login_phot.png"),),
+                        SizedBox(height: MediaQuery.of(context).size.height*0.02,) ,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*0.01 ),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor:  AppColors.theme['white'],
+                              hintText: "Enter Username",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color:  AppColors.theme['white'],
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.01),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor:  AppColors.theme['white'],
-                            hintText: "Enter Password",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color:  AppColors.theme['white'],
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color:  AppColors.theme['white'],
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _showPassword = !_showPassword;
-                                });
-                              },
-                              icon: Icon(
-                                _showPassword ? Icons.visibility_off : Icons.visibility,
-                                color:  Colors.black,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),
-                          obscureText: !_showPassword,
                         ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-                      Row(
-                        children: [
-                          SizedBox(width: MediaQuery.of(context).size.width*0.02,),
-                          Text("Don't have Account ? ",style: TextStyle(color: Colors.white),) ,
-                          TextButton
-                            (
-                              onPressed: ()
-                              {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentRegister())) ;
+                        SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.01),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor:  AppColors.theme['white'],
+                              hintText: "Enter Password",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _showPassword = !_showPassword;
+                                  });
+                                },
+                                icon: Icon(
+                                  _showPassword ? Icons.visibility_off : Icons.visibility,
+                                  color:  Colors.black,
+                                ),
+                              ),
+                            ),
+                            obscureText: !_showPassword,
+                          ),
+                        ),
+
+                        SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+                        Row(
+                          children: [
+                            SizedBox(width: MediaQuery.of(context).size.width*0.02,),
+                            Text("Don't have Account ? ",style: TextStyle(color: Colors.white),) ,
+                            TextButton
+                              (
+                                onPressed: ()
+                                {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentRegister())) ;
+                            },
+                                child:Text("Register",style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),)),
+                          ],
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+
                           },
-                              child:Text("Register",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-
-                        },
-                        child: Text('Login',style: TextStyle(color: Colors.black),),
-                        style: ElevatedButton.styleFrom(
-                          primary:  AppColors.theme['loginc'],
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                          child: Text('Login',style: TextStyle(color: Colors.black),),
+                          style: ElevatedButton.styleFrom(
+                            primary:  AppColors.theme['loginc'],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 16,horizontal: 15),
                           ),
-                          padding: EdgeInsets.symmetric(vertical: 16),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

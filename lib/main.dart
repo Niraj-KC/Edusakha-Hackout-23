@@ -21,7 +21,7 @@ class _myWebAppState extends State<myWebApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home: StudentRegister(),
+      home: LoginScreen(),
     );
   }
 }
