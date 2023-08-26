@@ -21,6 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController pass = TextEditingController();
 
   void signIn() async {
+    showDialog(context: context, builder: (context)
+    {
+      return Center(child: CircularProgressIndicator());
+    } ,
+
+    );
+
     User user = User(email: email.text, pwd: pass.text);
     print("object");
     Map<String, dynamic> res = await user.signIn(user);

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:apnashakha/UserAuth/User.dart';
+import 'package:apnashakha/reusable_Widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:apnashakha/main.dart';
 
@@ -55,18 +56,10 @@ class _SplashScreenState extends State<SplashScreen> {
         width: MediaQuery.of(context).size.width,
 
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.red,
-                // CustomThemeData.hexStringToColors("f4d5f6"),
-                Colors.pink
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-
-            )
+            color: AppColors.theme['bg'] ,
         ),
 
-        child: Center(child: Text("Splash Screen", style: TextStyle(fontSize: 40),),),
+        child: Center(child: CircleAvatar(radius: 60,backgroundImage: AssetImage("assets/images/logo.png"),),),
       ),
     );
   }
