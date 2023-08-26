@@ -1,54 +1,66 @@
-import 'package:apnashakha/appStartingScreens/login.dart';
-import 'package:apnashakha/appStartingScreens/uni_register.dart';
-import 'package:apnashakha/reusable_Widgets/colors.dart';
+import 'package:apnashakha/appStartingScreens/register.dart';
 import 'package:flutter/material.dart';
 
-class StudentRegister extends StatefulWidget {
-  const StudentRegister({super.key});
+import '../reusable_Widgets/colors.dart';
+import 'login.dart';
+import 'package:image_picker/image_picker.dart' ;
+import 'dart:io' ;
+
+class Uniregister extends StatefulWidget {
+  const Uniregister({super.key});
 
   @override
-  State<StudentRegister> createState() => _StudentRegisterState();
+  State<Uniregister> createState() => _UniregisterState();
 }
 
-class _StudentRegisterState extends State<StudentRegister> {
-  TextEditingController Name = TextEditingController() ;
-  TextEditingController Email = TextEditingController() ;
+class _UniregisterState extends State<Uniregister> {
+  TextEditingController UName = TextEditingController() ;
+  TextEditingController Address = TextEditingController() ;
+  TextEditingController wadd = TextEditingController() ;
   TextEditingController SPassword = TextEditingController() ;
   TextEditingController CPassword = TextEditingController() ;
-   bool _showPassword1  = false ;
+  final ImagePicker _picker = ImagePicker();
+  XFile ? file ;
   bool _showPassword2  = false ;
-  DateTime? selectedDate;
-
-  void _showdatepicker() async {
-    final selected = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2023),
-    );
-
-    if (selected != null && selected != selectedDate) {
-      setState(() {
-        selectedDate = selected;
-      });
-    }
-  }
   @override
-
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  Scaffold(
+      home: Scaffold(
         backgroundColor: AppColors.theme["bg"],
-          body: SafeArea(
-            child: Container(
+
+         body:  Container(
               child: Container(
                 child: Center(
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("User Registration",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+                        SizedBox(height: MediaQuery.of(context).size.width*0.1,),
+                        Text("University Registration",style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold),),
+                        SizedBox(height: MediaQuery.of(context).size.height*0.02,) ,
+                        Stack(
+                            alignment: Alignment.bottomRight,
+                            children:[
+
+                              CircleAvatar(
+                                  radius: 100,
+                                  backgroundColor:Colors.white,
+                                  child: file!=null ? Image.file(File(file!.path),fit:BoxFit.fill )
+                                      : Icon(Icons.insert_photo,size: 50,color: Colors.black54,)
+
+                              ),
+                              FloatingActionButton(
+                                backgroundColor: Colors.black,
+                                onPressed: ()async{
+                                  final XFile ? gallary = await _picker.pickImage(source: ImageSource.gallery) ;
+                                  setState(() {
+                                    file = gallary ;
+                                  });
+
+                                },child: Icon(Icons.edit,color:Colors.white),) ,
+                            ]
+                        ) ,
                         SizedBox(height: MediaQuery.of(context).size.height*0.02,) ,
                         Container(
                           width: MediaQuery.of(context).size.width*0.8,
@@ -56,7 +68,7 @@ class _StudentRegisterState extends State<StudentRegister> {
                             decoration: InputDecoration(
                               filled: true,
                               fillColor:  AppColors.theme['white'],
-                              hintText: "Enter Your Name",
+                              hintText: "University Name",
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -75,7 +87,7 @@ class _StudentRegisterState extends State<StudentRegister> {
                               ),
                             ),
 
-                            controller: Name,
+                            controller: UName,
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height*0.03,),
@@ -85,7 +97,7 @@ class _StudentRegisterState extends State<StudentRegister> {
                             decoration: InputDecoration(
                               filled: true,
                               fillColor:  AppColors.theme['white'],
-                              hintText: "Enter Your Email",
+                              hintText: "Enter Address",
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -104,12 +116,44 @@ class _StudentRegisterState extends State<StudentRegister> {
                               ),
                             ),
 
-                            controller: Email,
+                            controller: Address,
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height*0.03,),
                         Container(
 
+                          width: MediaQuery.of(context).size.width*0.8,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor:  AppColors.theme['white'],
+                              hintText: "Web Address",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+
+                              ),
+
+                            ),
+
+                            controller: wadd,
+
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                        Container(
                           width: MediaQuery.of(context).size.width*0.8,
                           child: TextFormField(
                             decoration: InputDecoration(
@@ -131,23 +175,22 @@ class _StudentRegisterState extends State<StudentRegister> {
                                   color:  AppColors.theme['white'],
                                 ),
                                 borderRadius: BorderRadius.circular(10),
-
                               ),
                               suffixIcon: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    _showPassword1 = !_showPassword1;
+                                    _showPassword2 = !_showPassword2;
                                   });
                                 },
                                 icon: Icon(
-                                  _showPassword1 ? Icons.visibility_off : Icons.visibility,
+                                  _showPassword2 ? Icons.visibility_off : Icons.visibility,
                                   color:  Colors.black,
                                 ),
                               ),
                             ),
-                            obscureText: !_showPassword1,
-                            controller: SPassword,
 
+                            controller: SPassword,
+                            obscureText: !_showPassword2,
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height*0.03,),
@@ -191,52 +234,10 @@ class _StudentRegisterState extends State<StudentRegister> {
                             obscureText: !_showPassword2,
                           ),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height*0.03,),
-                        Container(
-                          width: MediaQuery.of(context).size.width*0.8,
-                          height: 60,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor:  AppColors.theme['white'],
-                              hintText: "Choose BirthDate",
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color:  AppColors.theme['white'],
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  _showdatepicker();
-                                  },
-                                icon: Icon(
-                                  Icons.date_range,
-                                  color:  Colors.black,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color:  AppColors.theme['white'],
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
 
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(height: MediaQuery.of(context).size.height*0.01,) ,
                             Text("Already have an Account ? ",style: TextStyle(color: Colors.white),),
                             SizedBox(height: MediaQuery.of(context).size.height*0.02,) ,
                             TextButton(onPressed: (){
@@ -257,10 +258,12 @@ class _StudentRegisterState extends State<StudentRegister> {
                             padding: EdgeInsets.symmetric(vertical: 15,horizontal: 15),
                           ),
                         ),
-                        
+
+
+
                         TextButton(onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Uniregister())) ;
-                        }, child: Text("University Registration >"))
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentRegister())) ;
+                        }, child: Text("< User Registration "))
                       ],
 
 
@@ -269,9 +272,9 @@ class _StudentRegisterState extends State<StudentRegister> {
                   ),
                 ),
               )
-            ),
           )
-        ),
+      ),
+
     );
   }
 }
