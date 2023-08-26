@@ -1,3 +1,4 @@
+import 'package:apnashakha/appStartingScreens/register.dart';
 import 'package:flutter/material.dart' ;
 
 import 'appStartingScreens/login.dart';
@@ -17,7 +18,11 @@ class myWebApp extends StatefulWidget {
 class _myWebAppState extends State<myWebApp> {
   @override
   Widget build(BuildContext context) {
-    return loginScreen();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+
+      home: StudentRegister(),
+    );
   }
 }
 

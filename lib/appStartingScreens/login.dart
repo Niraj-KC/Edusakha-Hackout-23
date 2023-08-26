@@ -1,16 +1,17 @@
+import 'package:apnashakha/appStartingScreens/register.dart';
 import 'package:apnashakha/reusable_Widgets/colors.dart';
 import 'package:flutter/material.dart' ;
 import 'package:apnashakha/reusable_Widgets/colors.dart' ;
 
 
-class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _loginScreenState extends State<loginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
 
   bool _showPassword = false;
   @override
@@ -113,11 +114,15 @@ class _loginScreenState extends State<loginScreen> {
                       SizedBox(height: MediaQuery.of(context).size.height*0.02,),
                       Row(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.01),
-                            child: Text("Don't have Account ? ",style: TextStyle(color: Colors.white),),
-                          ) ,
-                          TextButton(onPressed: (){}, child:Text("Register",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
+                          SizedBox(width: MediaQuery.of(context).size.width*0.02,),
+                          Text("Don't have Account ? ",style: TextStyle(color: Colors.white),) ,
+                          TextButton
+                            (
+                              onPressed: ()
+                              {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentRegister())) ;
+                          },
+                              child:Text("Register",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
                         ],
                       ),
                       ElevatedButton(
