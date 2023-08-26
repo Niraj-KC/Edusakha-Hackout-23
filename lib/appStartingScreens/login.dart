@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.01),
                           child: TextFormField(
-                            controller: passk@,
+                            controller: pass,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor:  AppColors.theme['white'],

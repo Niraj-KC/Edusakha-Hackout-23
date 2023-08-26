@@ -56,7 +56,6 @@ class _StudentRegisterState extends State<StudentRegister> {
 
 
   @override
-
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -249,41 +248,6 @@ class _StudentRegisterState extends State<StudentRegister> {
                             ),
                           ),
 
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(height: MediaQuery.of(context).size.height*0.01,) ,
-                            Text("Already have an Account ? ",style: TextStyle(color: Colors.white),),
-                            SizedBox(height: MediaQuery.of(context).size.height*0.02,) ,
-                            TextButton(onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen())) ;
-                            }, child: Text("Login",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),))
-                          ],
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-
-                          },
-                          child: Text('Register',style: TextStyle(color: Colors.black),),
-                          style: ElevatedButton.styleFrom(
-                            primary:  AppColors.theme['loginc'],
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.symmetric(vertical: 15,horizontal: 15),
-                          ),
-                        ),
-
-                        TextButton(onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Uniregister())) ;
-                        }, child: Text("University Registration >"))
-                      ],
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -303,7 +267,7 @@ class _StudentRegisterState extends State<StudentRegister> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                            signUp();
+
                         },
                         child: Text('Register',style: TextStyle(color: Colors.black),),
                         style: ElevatedButton.styleFrom(
