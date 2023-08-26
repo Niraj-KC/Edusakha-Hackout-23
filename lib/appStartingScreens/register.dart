@@ -1,6 +1,9 @@
+import 'package:apnashakha/UserAuth/User.dart';
 import 'package:apnashakha/appStartingScreens/login.dart';
 import 'package:apnashakha/reusable_Widgets/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../mainScreens/homeScreen.dart';
 
 class StudentRegister extends StatefulWidget {
   const StudentRegister({super.key});
@@ -32,8 +35,26 @@ class _StudentRegisterState extends State<StudentRegister> {
       });
     }
   }
-  @override
 
+  Future signUp () async {
+    User user = User(email: Email.text, pwd: CPassword.text, name: Name.text, dob: "12/02/2004", isStudent: true);
+    Map<String, dynamic> res = await user.signUp(user);
+    print(res);
+    bool isCreated = res["responseData"]["created"];
+    if(isCreated==true){
+      user.storeUser(user);
+      user.auth_token = res["responseData"]["token"];
+      print(user.auth_token);
+      print("stored user");
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -244,7 +265,7 @@ class _StudentRegisterState extends State<StudentRegister> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-
+                            signUp();
                         },
                         child: Text('Register',style: TextStyle(color: Colors.black),),
                         style: ElevatedButton.styleFrom(

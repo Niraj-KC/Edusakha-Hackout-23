@@ -3,6 +3,9 @@ import 'package:apnashakha/reusable_Widgets/colors.dart';
 import 'package:flutter/material.dart' ;
 import 'package:apnashakha/reusable_Widgets/colors.dart' ;
 
+import '../UserAuth/User.dart';
+import '../mainScreens/homeScreen.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,6 +17,27 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   bool _showPassword = false;
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
+
+  void signIn() async {
+    User user = User(email: email.text, pwd: pass.text);
+    print("object");
+    Map<String, dynamic> res = await user.signIn(user);
+    print("object2 ${res}");
+
+
+    user.isAuthorized = res["responseData"]["isAuthenticated"];
+
+    if(user.isAuthorized==true){
+      user.auth_token = res["responseData"]["token"];
+      user.storeUser(user);
+      print("stored user: ${user.auth_token}");
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*0.01 ),
                           child: TextFormField(
+                            controller: email,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor:  AppColors.theme['white'],
@@ -71,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.01),
                           child: TextFormField(
+                            controller: passk@,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor:  AppColors.theme['white'],
@@ -123,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-
+                            signIn();
                           },
                           child: Text('Login',style: TextStyle(color: Colors.black),),
                           style: ElevatedButton.styleFrom(
