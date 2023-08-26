@@ -28,7 +28,7 @@ class _loginScreenState extends State<loginScreen> {
             ),
             child: Center(
               child: SizedBox(
-                width: 250,
+                width: 300,
                 height: 500,
 
                 child: Container(
@@ -113,7 +113,10 @@ class _loginScreenState extends State<loginScreen> {
                       SizedBox(height: MediaQuery.of(context).size.height*0.02,),
                       Row(
                         children: [
-                          Text("Don't have Account ? ") , 
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.01),
+                            child: Text("Don't have Account ? ",style: TextStyle(color: Colors.white),),
+                          ) ,
                           TextButton(onPressed: (){}, child:Text("Register",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
                         ],
                       ),
