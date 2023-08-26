@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:apnashakha/UserAuth/User.dart';
 import 'package:apnashakha/reusable_Widgets/colors.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,27 @@ class _SplashScreenState extends State<SplashScreen> {
             color: AppColors.theme['bg'] ,
         ),
 
-        child: Center(child: CircleAvatar(radius: 60,backgroundImage: AssetImage("assets/images/logo.png"),),),
+        child: Center(child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(radius: 60,backgroundImage: AssetImage("assets/images/logo.png"),),
+          SizedBox(height: MediaQuery.of(context).size.height*0.1,) ,
+          DefaultTextStyle(
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                WavyAnimatedText('Edushakha',textStyle: TextStyle(fontSize: 30)),
+              ],
+              isRepeatingAnimation: true,
+              onTap: () {
+                print("Tap Event");
+              },
+            ),
+          ),
+          ],
+        ),),
       ),
     );
   }
