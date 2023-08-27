@@ -84,10 +84,11 @@ def login(request):
             for token in jwt:
                 token.delete()
             jwt = JWT.objects.create(user = user[0])
+            print(user[0].name)
             if(user[0].is_university):
                 return JsonResponse({"responseData" :{"isAuthenticated": True, "token": str(jwt.token), 'is_student': user[0].is_student, 'is_university': user[0].is_university, "dp_path" : user[0].photo.url if user[0].photo else '', 'name': user[0].name, 'email': user[0].email}})
             else:
-                return JsonResponse({"responseData" :{"isAuthenticated": True, "token": str(jwt.token), 'is_student': user[0].is_student, 'is_university': user[0].is_university}})
+                return JsonResponse({"responseData" :{"isAuthenticated": True, "token": str(jwt.token), 'is_student': user[0].is_student, 'is_university': user[0].is_university, 'name': user[0].name, 'email': user[0].email}})
         else:
             return JsonResponse({"responseData" : {"isAuthenticated": False}})
 
