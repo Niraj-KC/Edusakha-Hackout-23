@@ -1,4 +1,3 @@
-import 'package:apnashakha/appStartingScreens/login.dart';
 import 'package:flutter/material.dart';
 
 import '../Upcoming.dart';
@@ -9,13 +8,42 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<String>  Uninames = [
+       'DA-IICT',
+       'Nirma University' ,
+       'Dharamsinh Desai University',
+        'Pandit Dindayal Petrolium University',
+        'Darshan University'
+  ] ;
+  List<String> filterednames = [];
+
+  void initState() {
+    super.initState();
+    filterednames.addAll(Uninames);
+  }
+
+  void searchContainers(String query) {
+    setState(() {
+      filterednames = Uninames
+          .where((name) => name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       appBar: AppBar(
         title: Text("EDUSHAKHA"),
 
       ),
       drawer: Drawer(
+        backgroundColor: AppColors.theme['bg'],
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -55,6 +83,7 @@ class HomeScreen extends StatelessWidget {
         ),
 
       ),
+
     );
   }
 }
