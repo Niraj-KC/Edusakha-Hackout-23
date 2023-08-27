@@ -2,6 +2,7 @@ import 'package:apnashakha/appStartingScreens/register.dart';
 import 'package:flutter/material.dart';
 
 import '../UserAuth/User.dart';
+import '../mainScreens/homeScreen.dart';
 import '../reusable_Widgets/colors.dart';
 import 'login.dart';
 import 'package:image_picker/image_picker.dart' ;
