@@ -1,6 +1,7 @@
 import 'package:apnashakha/appStartingScreens/register.dart';
 import 'package:flutter/material.dart';
 
+import '../UserAuth/User.dart';
 import '../reusable_Widgets/colors.dart';
 import 'login.dart';
 import 'package:image_picker/image_picker.dart' ;
@@ -19,9 +20,35 @@ class _UniregisterState extends State<Uniregister> {
   TextEditingController wadd = TextEditingController() ;
   TextEditingController SPassword = TextEditingController() ;
   TextEditingController CPassword = TextEditingController() ;
+
   final ImagePicker _picker = ImagePicker();
   XFile ? file ;
   bool _showPassword2  = false ;
+
+  Future signUp () async {
+    showDialog(context: context, builder: (context)
+    {
+      return Center(child: CircularProgressIndicator());
+    } ,
+
+    );
+    User user = User(email: UName.text, pwd: CPassword.text, isStudent: false, webAdd: wadd.text);
+    Map<String, dynamic> res = await user.signUp(user);
+    print(res);
+    bool isCreated = res["responseData"]["created"];
+    if(isCreated==true){
+      user.storeUser(user);
+      user.auth_token = res["responseData"]["token"];
+      print(user.auth_token);
+      print("stored user");
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,7 +82,7 @@ class _UniregisterState extends State<Uniregister> {
                                 onPressed: ()async{
                                   final XFile ? gallary = await _picker.pickImage(source: ImageSource.gallery) ;
                                   setState(() {
-                                    file = gallary ;
+                                    file = gallary;
                                   });
 
                                 },child: Icon(Icons.edit,color:Colors.white),) ,

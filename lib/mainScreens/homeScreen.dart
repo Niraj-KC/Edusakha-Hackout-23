@@ -1,7 +1,9 @@
+import 'package:apnashakha/appStartingScreens/login.dart';
 import 'package:flutter/material.dart';
 
 import '../Upcoming.dart';
 import '../join_meeting.dart';
+import 'package:apnashakha/UserAuth/User.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -39,7 +41,10 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height*0.5,) ,
               ListTile(
                 title: InkWell(
-                    onTap:  () {},
+                    onTap:  () {
+                      User().removeUser();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                    },
 
                     child: Text("Log Out")),
                 leading: Icon(Icons.logout),

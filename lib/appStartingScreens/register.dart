@@ -131,128 +131,128 @@ class _StudentRegisterState extends State<StudentRegister> {
                                 ),
                               ),
 
-                              controller: Email,
-                            ),
+                            controller: Email,
                           ),
-                          SizedBox(height: MediaQuery.of(context).size.height*0.03,),
-                          Container(
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                        Container(
 
-                            width: MediaQuery.of(context).size.width*0.8,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor:  AppColors.theme['white'],
-                                hintText: "Set Password",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          width: MediaQuery.of(context).size.width*0.8,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor:  AppColors.theme['white'],
+                              hintText: "Set Password",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:  AppColors.theme['white'],
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:  AppColors.theme['white'],
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10),
 
-                                ),
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _showPassword1 = !_showPassword1;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    _showPassword1 ? Icons.visibility_off : Icons.visibility,
-                                    color:  Colors.black,
-                                  ),
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _showPassword1 = !_showPassword1;
+                                  });
+                                },
+                                icon: Icon(
+                                  _showPassword1 ? Icons.visibility_off : Icons.visibility,
+                                  color:  Colors.black,
                                 ),
                               ),
-                              obscureText: !_showPassword1,
-                              controller: SPassword,
-
                             ),
+                            obscureText: !_showPassword1,
+                            controller: SPassword,
+
                           ),
-                          SizedBox(height: MediaQuery.of(context).size.height*0.03,),
-                          Container(
-                            width: MediaQuery.of(context).size.width*0.8,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor:  AppColors.theme['white'],
-                                hintText: "Confirm Password",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.8,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor:  AppColors.theme['white'],
+                              hintText: "Confirm Password",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:  AppColors.theme['white'],
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:  AppColors.theme['white'],
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _showPassword2 = !_showPassword2;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    _showPassword2 ? Icons.visibility_off : Icons.visibility,
-                                    color:  Colors.black,
-                                  ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _showPassword2 = !_showPassword2;
+                                  });
+                                },
+                                icon: Icon(
+                                  _showPassword2 ? Icons.visibility_off : Icons.visibility,
+                                  color:  Colors.black,
                                 ),
                               ),
+                            ),
 
-                              controller: CPassword,
-                              obscureText: !_showPassword2,
+                          controller: CPassword,
+                          obscureText: !_showPassword2,
+                        ),
+                      ),
+                      SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.7,
+                        height: 60,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor:  AppColors.theme['white'],
+                            hintText: "Choose BirthDate",
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color:  AppColors.theme['white'],
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                _showdatepicker();
+                                },
+                              icon: Icon(
+                                Icons.date_range,
+                                color:  Colors.black,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color:  AppColors.theme['white'],
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          SizedBox(height: MediaQuery.of(context).size.height*0.03,),
-                          Container(
-                            width: MediaQuery.of(context).size.width*0.8,
-                            height: 60,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor:  AppColors.theme['white'],
-                                hintText: "Choose BirthDate",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:  AppColors.theme['white'],
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    _showdatepicker();
-                                  },
-                                  icon: Icon(
-                                    Icons.date_range,
-                                    color:  Colors.black,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:  AppColors.theme['white'],
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
 
                             ),
                             decoration: BoxDecoration(
@@ -290,14 +290,14 @@ class _StudentRegisterState extends State<StudentRegister> {
                         ],
 
 
-                      ),
-
                     ),
+
                   ),
-                )
+                ),
+              )
             ),
           )
-      ),
+        ),
     );
   }
 }
