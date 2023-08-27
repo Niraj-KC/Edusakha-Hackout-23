@@ -17,6 +17,7 @@ class Uniregister extends StatefulWidget {
 
 class _UniregisterState extends State<Uniregister> {
   TextEditingController UName = TextEditingController() ;
+  TextEditingController email = TextEditingController() ;
   TextEditingController Address = TextEditingController() ;
   TextEditingController wadd = TextEditingController() ;
   TextEditingController SPassword = TextEditingController() ;
@@ -33,7 +34,7 @@ class _UniregisterState extends State<Uniregister> {
     } ,
 
     );
-    User user = User(email: UName.text, pwd: CPassword.text, isStudent: false, webAdd: wadd.text);
+    User user = User(email: email.text, name: UName.text, address: Address.text, pwd: CPassword.text, isStudent: false, webAdd: wadd.text);
     Map<String, dynamic> res = await user.signUp(user);
     print(res);
     bool isCreated = res["responseData"]["created"];
@@ -41,6 +42,7 @@ class _UniregisterState extends State<Uniregister> {
       user.storeUser(user);
       user.auth_token = res["responseData"]["token"];
       print(user.auth_token);
+
       print("stored user");
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -70,7 +72,6 @@ class _UniregisterState extends State<Uniregister> {
                         Stack(
                             alignment: Alignment.bottomRight,
                             children:[
-
                               CircleAvatar(
                                   radius: 100,
                                   backgroundColor:Colors.white,
@@ -78,6 +79,7 @@ class _UniregisterState extends State<Uniregister> {
                                       : Icon(Icons.insert_photo,size: 50,color: Colors.black54,)
 
                               ),
+                              ClipOval(),
                               FloatingActionButton(
                                 backgroundColor: Colors.black,
                                 onPressed: ()async{
@@ -119,6 +121,37 @@ class _UniregisterState extends State<Uniregister> {
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.8,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor:  AppColors.theme['white'],
+                              hintText: "University Email",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:  AppColors.theme['white'],
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+
+                            controller: email,
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height*0.03,),
+
+
                         Container(
                           width: MediaQuery.of(context).size.width*0.8,
                           child: TextFormField(
@@ -275,7 +308,7 @@ class _UniregisterState extends State<Uniregister> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-
+                            signUp();
                           },
                           child: Text('Register',style: TextStyle(color: Colors.black),),
                           style: ElevatedButton.styleFrom(

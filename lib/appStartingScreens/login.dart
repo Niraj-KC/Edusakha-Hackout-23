@@ -2,7 +2,7 @@ import 'package:apnashakha/appStartingScreens/register.dart';
 import 'package:apnashakha/reusable_Widgets/colors.dart';
 import 'package:flutter/material.dart' ;
 import 'package:apnashakha/reusable_Widgets/colors.dart' ;
-
+import 'package:apnashakha/UserAuth/curUser.dart';
 import '../UserAuth/User.dart';
 import '../mainScreens/homeScreen.dart';
 
@@ -35,11 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
     user.isAuthorized = res["responseData"]["isAuthenticated"];
-
     if(user.isAuthorized==true){
-      user.auth_token = res["responseData"]["token"];
+      CurUser.curUserFromJson(res["responseData"]);
+
       user.storeUser(user);
-      print("stored user: ${user.auth_token}");
+      print("stored user: ${CurUser.auth_token}");
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     }
