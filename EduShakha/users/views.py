@@ -9,6 +9,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.auth import authenticate
 import json
+import os
 from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
@@ -19,6 +20,7 @@ from django.db import IntegrityError
 from django.core.mail import send_mail
 import EduShakha.settings as settings
 import datetime
+from django.core.files import File
 
 
 # Create your views here.
@@ -32,10 +34,16 @@ def register_uni(request):
         website = body["website"]
         try : 
             user = User.objects.create_user(email = email, password = password)
-            jwt = JWT.objects.create(user = user)
-            print("HERE")
+            user.is_university = True
+            user.name = name
+            user.address = address
+            user.website = website
             user.save()
-            return JsonResponse({"responseData" :{"created": True, "token": str(jwt.token)}})
+            jwt = JWT.objects.create(user = user)
+            jwt.save()
+            print("HERE")
+            # user.delete()
+            return JsonResponse({"responseData" :{"created": True, "token": str(jwt.token), 'is_student': user.is_student, 'is_university': user.is_university,  "dp_path" : ''}})
         except Exception as e:
             return JsonResponse({"responseData" : {"created": False}})
 
@@ -51,11 +59,15 @@ def register_student(request):
             format_str = '%d/%m/%Y'  
             user = User.objects.create_user(email = email, password = password)
             user.name = name
-            user.dob = datetime.datetime.strptime(date_str, format_str).date()
+            print("here")
+            user.dob = datetime.datetime.strptime(dob, format_str).date()
             user.save()
             jwt = JWT.objects.create(user = user)
-            user.save()
-            return JsonResponse({"responseData" :{"created": True, "token": str(jwt.token)}})
+            jwt.save()
+            if(user.is_university):
+                return JsonResponse({"responseData" :{"created": True, "token": str(jwt.token), 'is_student': user.is_student, 'is_university': user.is_university, 'dp_url': user.photo.url}})
+            else:
+                return JsonResponse({"responseData" :{"created": True, "token": str(jwt.token), 'is_student': user.is_student, 'is_university': user.is_university}})
         except Exception as e:
             return JsonResponse({"responseData" : {"created": False}})
 
@@ -64,13 +76,18 @@ def login(request):
         body=json.loads(request.body.decode("utf-8"))
         email = body["email"]
         password = body["password"]
+        print(email, password)
         if(authenticate(email=email, password=password)):
+            print("Here")
             user = User.objects.all().filter(email=email)
             jwt = JWT.objects.all().filter(user = user[0])
             for token in jwt:
                 token.delete()
             jwt = JWT.objects.create(user = user[0])
-            return JsonResponse({"responseData" :{"isAuthenticated": True, "token": str(jwt.token), 'is_student': user[0].is_student, 'is_university': user[0].is_university}})
+            if(user[0].is_university):
+                return JsonResponse({"responseData" :{"isAuthenticated": True, "token": str(jwt.token), 'is_student': user[0].is_student, 'is_university': user[0].is_university, "dp_path" : user[0].photo.url if user[0].photo else '', 'name': user[0].name, 'email': user[0].email}})
+            else:
+                return JsonResponse({"responseData" :{"isAuthenticated": True, "token": str(jwt.token), 'is_student': user[0].is_student, 'is_university': user[0].is_university}})
         else:
             return JsonResponse({"responseData" : {"isAuthenticated": False}})
 
@@ -138,5 +155,29 @@ def change_forgotten_passwrd(request, token):
         except Exception as e:
             print(e)
             return JsonResponse({"responseData": {"validToken": False}})
+
+def upload_dp(request):
+    if request.method == "POST":
+        try:
+            jwt_token = request.headers['Authorization']
+            jwt = JWT.objects.get(token = jwt_token)
+            user = User.objects.get(jwt = jwt)
+            if(not user.is_university):
+                return JsonResponse({"responseData": {"uploaded": False}})
+            
+            print(user.photo)
+            file_ = request.FILES['DP']
+            filename1 = datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + ".jpg"
+            with open(f"MEDIA/uploads/{filename1}", "wb+") as f:
+                for chunk in file_.chunks():
+                    f.write(chunk)
+                user.photo = File(f, os.path.basename(f.name))
+                user.save()
+            # user.photo = request.FILES['DP']
+            return JsonResponse({"responseData": {"uploaded": True}})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"responseData": {"uploaded": False}})
+
 
 

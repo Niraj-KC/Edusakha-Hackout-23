@@ -76,9 +76,9 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     # UNIVESITY FIELDS
     is_university = models.BooleanField(default=False)
-    address = models.CharField(max_length=500, null=False, blank=False)
-    website = models.URLField(null=False, blank=False)
-    photo = models.FileField(upload_to='uploads/')
+    address = models.CharField(max_length=500)
+    website = models.URLField()
+    photo = models.FileField(upload_to='uploads/' ,default='')
 
     USERNAME_FIELD = 'email'
 
@@ -119,7 +119,7 @@ class User(AbstractBaseUser):
         meetings
 
     def delete(self, *args, **kwargs):
-        delete_folder(f'media/UserSpecific/{self.email}/')
+        # delete_folder(f'media/UserSpecific/{self.email}/')
         super(User, self).delete(*args, **kwargs)
 
     def has_perm(self, perm, obj=None):
@@ -143,11 +143,11 @@ class User(AbstractBaseUser):
 
 
 class Meeting(models.Model):
-    channel_name = models.CharField(max_length = 255, blank = False, null = False)
+    channel_name = models.CharField(max_length = 255, blank = False, null = False, default = "")
     university = models.CharField(max_length = 255, blank=False, null=False)
     users = models.ManyToManyField(User)
     host_name = models.CharField(null=False, blank=False, max_length=255)
-    schedudled_date_time = models.DateTimeField(blank=False, null=False)
+    scheduled_date_time = models.DateTimeField(blank=False, null=False)
     time_in_minutes = models.IntegerField(default=30, null=False, blank=False)
 
     def get_regestered_users():
