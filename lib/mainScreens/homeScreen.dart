@@ -155,19 +155,44 @@ class SearchResultScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 20,top: MediaQuery.of(context).size.height*0.025,right: MediaQuery.of(context).size.width*0.25),
-                                child: Text("Hackout'23",style: TextStyle(fontSize: 25,color: Colors.white),),
+                                child: Text("HackNUo",style: TextStyle(fontSize: 25,color: Colors.white),),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.013,right: MediaQuery.of(context).size.width*0.15),
-                                child: Text("25th Aug 18:30",style: TextStyle(fontSize: 18,color: Colors.grey),),
+                                child: Text("30th Aug 14:30",style: TextStyle(fontSize: 18,color: Colors.grey),),
                               ),
                             ],
                           ),
                           ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),),onPressed: (){}, child: Text("Register")),
                         ],
                       ),
-                    )
-                  ],
+                    ),
+                    SizedBox(height: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.theme['bg']
+                      ),
+                      height: 120,
+                      width: MediaQuery.of(context).size.width*0.9,
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 20,top: MediaQuery.of(context).size.height*0.025,right: MediaQuery.of(context).size.width*0.25),
+                                child: Text("HackTech",style: TextStyle(fontSize: 25,color: Colors.white),),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.013,right: MediaQuery.of(context).size.width*0.15),
+                                child: Text("31th Dec 18:00",style: TextStyle(fontSize: 18,color: Colors.grey),),
+                              ),
+                            ],
+                          ),
+                          ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),),onPressed: (){}, child: Text("Register")),
+                        ],
+                      ),
+                    ),                  ],
                 ),
                 width: 400,
                 height: 500,
@@ -196,11 +221,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<String>  Uninames = [
+    "Harvad University",
     'DA-IICT',
     'Nirma University' ,
     'Dharamsinh Desai University',
     'Pandit Dindayal Petrolium University',
-    'Darshan University'
+    'Darshan University',
+    "VVP Rajkot",
+    "Labhai Trived eng. College",
+    "IIT ghandhinagar",
+    "NIT Surat",
   ] ;
   List<String> filterednames = [];
   @override
