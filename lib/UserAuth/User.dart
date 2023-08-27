@@ -13,12 +13,14 @@ class User {
   String? dob;
   String? pwd;
   bool? isStudent = true;
+  String? address;
+  String? webAdd;
 
   String? auth_token;
   bool isAuthorized = false;
   String basicUri = BASE_URL;
 
-  User({this.email, this.name, this.pwd, this.dob, this.isStudent});
+  User({this.email, this.name, this.pwd, this.dob, this.isStudent, this.address, this.webAdd});
 
   Map<String, String> toJSONLogIn(User user) {
     return {
@@ -40,7 +42,10 @@ class User {
     }
     else {
       return {
-        "":""
+        "email":user.email!,
+        "password": user.pwd!,
+        "address": user.address!,
+        "webAdd": user.webAdd!
       };
     }
   }
@@ -59,6 +64,9 @@ class User {
         return jsonDecode(res.body);
       else
         throw Exception("Failed to register");
+    }
+    else{
+
     }
 
 
@@ -88,6 +96,14 @@ class User {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("auth_token", auth_token!);
     prefs.setBool("isStudent", isStudent!);
+  }
+
+
+  Future removeUser () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("auth_token");
+    prefs.remove("isStudent");
+
   }
 
 
