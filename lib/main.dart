@@ -36,8 +36,8 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      // home: SplashScreen(),
-      home: HomeScreen(),
+      home: SplashScreen(),
+      // home: HomeScreen(),
     );
   }
 }
